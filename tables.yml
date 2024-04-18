@@ -1,0 +1,81 @@
+# User Input is being loaded from this yml file. User can provide more input tables for comaprison. Each entry adheres to specified criteria below.
+# Kindly provide the Hive table (production table) and its corresponding Databricks table (stage/test table) mappings with accurate schema for count comparison, as indicated in the provided this file
+
+# User can provide more input tables for comaprison. Each entry adheres to specified criteria below.
+# **validation_status**: Only accepts values True or False. Rows labeled with False are excluded from the final output DataFrame in the program.
+# **hive_table**: Please provide the Hive table that you want to compare.( Provide with catalog.schema.table_name format )
+# **databricks_table**: Please provide corresponding Databricks table of the Hive table for comparison.( Provide with catalog.schema.table_name format )
+# **filter_condition**: Specify the filter condition with format commonly used SQL queries after the WHERE clause. For example: p_data_date >= date'2024-01-01' AND active_standard IS NOT NULL. The Filter will be applied to both hive and databricks tables. Specify an empty string "" or None if you choose not to add any filter.
+# **materialization**: Please provide the materialization used for both tables, e.g., incremental or full_refresh. This column is for informational purposes.
+
+# Note:
+# - Kindly provide the Hive table (production table) and its corresponding Databricks table (stage/test table) mappings with accurate schema for count comparison, as indicated in the provided **tables.yml** list.
+# - For partitioned tables, it's recommended to add filters.
+
+rows:
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.agentinfo'
+    databricks_table: 'dev_mopsde.mart_mops_test.agentinfo'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.mops_ad_hierarchy'
+    databricks_table: 'dev_mopsde.mart_mops_test.mops_ad_hierarchy'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'False'
+    hive_table: 'hive_metastore.mart_mops.boz_pathways_model'
+    databricks_table: 'dev_mopsde.mart_mops_test.boz_pathways_model'
+    filter_condition: "p_data_date = date'2024-04-13'"
+    materialization: 'incremental'
+  
+  - validation_status: 'False'
+    hive_table: 'hive_metastore.mart_mops.boz_clicks_fact'
+    databricks_table: 'dev_mopsde.mart_mops_test.boz_clicks_fact'
+    filter_condition: "process_date = date'2024-04-01'"
+    materialization: 'incremental'
+  
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.agent_forecast'
+    databricks_table: 'dev_mopsde.mart_mops_test.agent_forecast'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.agentacademy'
+    databricks_table: 'dev_mopsde.mart_mops_test.agentacademy'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.mops_b2cplanningmetrics'
+    databricks_table: 'dev_mopsde.mart_mops_test.mops_b2cplanningmetrics'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.agent_ltv'
+    databricks_table: 'dev_mopsde.mart_mops_test.agent_ltv'
+    filter_condition: ""
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.email_link_data'
+    databricks_table: 'dev_mopsde.mart_mops_test.email_link_data'
+    filter_condition: "process_date >= date'2024-04-01'"
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.mops_b2c_measurments_fact'
+    databricks_table: 'dev_mopsde.mart_mops_test.mops_b2c_measurments_fact'
+    filter_condition: "process_year = 2024 AND process_month = '04'"
+    materialization: 'incremental'
+
+  - validation_status: 'True'
+    hive_table: 'hive_metastore.mart_mops.mops_omp_fact'
+    databricks_table: 'dev_mopsde.mart_mops_test.mops_omp_fact'
+    filter_condition: ""
+    materialization: 'incremental'
+  
